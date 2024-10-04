@@ -5,7 +5,6 @@ while i <= 35:
     numms.append(i)
     i += 3
 
-# for num in numms:
-#      total += num
-# summ = total - 8
-# print(summ)
+for num in numms:
+     total += num
+print(total)
