@@ -1,5 +1,5 @@
 
-
+#Лабораторная работа 3, задание 2 уровня, номер 7 
 
 import random
 Mol = [random.randint(-(10**10), 10**10) for _ in range(8)]
