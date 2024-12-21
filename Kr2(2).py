@@ -31,13 +31,14 @@ if kn1 > kn2:
     n = a[index_1::]
     for ni in n:
         tot += ni
-    a[ind1] = tot
+    end1 = tot / kn1
+    a[ind1] = round(end1)
 else:
     n = b[index_2::]
     for ni in n:
         tot += ni
-    b[ind2] = tot
+    end2 = tot / kn2
+    b[ind2] = round(end2)
 
-print(tot)
 print(a)
 print(b)
