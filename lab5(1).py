@@ -8,6 +8,12 @@ trk2 = list(map(int, input("Введите длину каждой сторон�
 
 mrt = []
 
+def yravnen(p, a, b, c):
+    return (p * (p - a) * (p - b) * (p - c)) ** 0.5
+
+def pppppp(a, b, c):
+    return (a + b + c) / 2
+
 for i in trk1:
     mrt.append(i)
 
@@ -15,9 +21,9 @@ a1 = mrt[0]
 b1 = mrt[1]
 c1 = mrt[2]
 
-p1 = (a1 + b1 + c1) / 2
+p1 = pppppp(a1, b1, c1)
 
-S1 =  (p1 * (p1 - a1) * (p1 - b1) * (p1 - c1)) ** 0.5
+S1 = round(yravnen(p1, a1, b1, c1))
 
 mrt.clear()
 for n in trk2:
@@ -27,9 +33,9 @@ a2 = mrt[0]
 b2 = mrt[1]
 c2 = mrt[2]
 
-p2 = (a2 + b2 + c2) / 2
+p2 = pppppp(a2, b2, c2)
 
-S2 = (p2 * (p2 - a2) * (p2 - b2) * (p2 - c2)) ** 0.5
+S2 = round(yravnen(p2, a2, b2, c2))
 
 print('Площадь первого треугольника:',S1, 'Площадь второго треугольника: ',S2)
 
@@ -40,3 +46,4 @@ try:
         print(S2)
 except (TypeError, ZeroDivisionError):
     print('Невозможно вычеслить, треугольника не сушествует')
+    
