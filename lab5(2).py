@@ -11,9 +11,16 @@ print(b)
 
 tot = 0
 
-max1 = max(a)
+def max_list(list):
+    max = list[0]
+    for a in list:
+        if a > max:
+            max = a
+    return max
+
+max1 = max_list(a)
 print(max1)
-max2 = max(b)
+max2 = max_list(b)
 print(max2)
 
 ind1 = a.index(max1)
