@@ -3,11 +3,11 @@
 
 import random
 a = [random.randint(0, 10**10) for _ in range(9)]
-print(a)
+print('Первый масив A размером 9', a)
 
 import random
 b = [random.randint(0, 10**10) for _ in range(7)]
-print(b)
+print('Второй масив B размером 7', b)
 
 tot = 0
 
@@ -19,9 +19,9 @@ def max_list(list):
     return max
 
 max1 = max_list(a)
-print(max1)
+print('Максимальный элемент первого масива', max1)
 max2 = max_list(b)
-print(max2)
+print('Максимальный элемент второго масива', max2)
 
 ind1 = a.index(max1)
 index_1 = ind1 + 1
@@ -40,12 +40,11 @@ if kn1 > kn2:
         tot += ni
     end1 = tot / kn1
     a[ind1] = round(end1)
+    print('Ответ: первый масив изменён', a)
 else:
     n = b[index_2::]
     for ni in n:
         tot += ni
     end2 = tot / kn2
     b[ind2] = round(end2)
-
-print(a)
-print(b)
+    print('Ответ: второй масив изменён', b)
