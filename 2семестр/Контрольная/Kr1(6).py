@@ -14,7 +14,27 @@ print(data.target_names)
 
 x_train, x_test, y_train, y_test = train_test_split(np.array(data.data),np.array(data.target), test_size=0.2)
 
-clf = KNeighborsClassifier(n_neighbors=13)
-clf.fit(x_train, y_train)
+x_tr = []
 
-print(clf.score(x_test, y_test)) #выводит текушую точность модели
+for i in x_train:
+    l = []
+    l.append(i[0])
+    l.append(i[1])
+    x_tr.append(l)
+
+x_tes = []
+
+for i in x_test:
+    l = []
+    l.append(i[0])
+    l.append(i[1])
+    x_tes.append(l)
+
+
+
+clf = KNeighborsClassifier(n_neighbors=13)
+clf.fit(x_tr, y_train)
+
+print(clf.score(x_tes, y_test)) #выводит текушую точность модели
+
+plt.show(x_tes, y_test)
