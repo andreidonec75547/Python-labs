@@ -54,12 +54,15 @@ def decode_text(encoded_text):
 
 
 #ввод текста
-input_text = input("Введите текст: ")
+input_text = [input("Введите текст: ")]
 
-#кодирование
-encoded = encode_text(input_text)
-print("\nЗакодированный текст:")
-print(encoded)
+for intext in input_text:
+    #кодирование
+    encoded = encode_text(intext)
+    print("\nЗакодированный текст:")
+    print(encoded)
+
+
 
 #декодирование
 decoded = decode_text(encoded)
