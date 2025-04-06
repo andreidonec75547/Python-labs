@@ -30,6 +30,21 @@ for i in y_r1:
 for i in y_r2:
     y.append(i)
 
+#создаём вложаный масив с координатами х и у
+l = len(x) - 1
+
+i = 0
+
+xy = []
+
+while i < l:
+    i += 1
+    g = []
+    g.append(x[i])
+    g.append(y[i])
+    xy.append(g)
+
+
 #ищем длину списков
 len_x = len(x) - 1
 len_y = len(y) - 1
@@ -69,7 +84,7 @@ for i in en:
 
 #сортируем масив
 k = sorted(n)
-print(n)
+
 #закидываем в масив только отрецательные элементы
 b = []
 
