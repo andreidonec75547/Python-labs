@@ -1,8 +1,8 @@
 #метод K ближайших соседей для K = 3
 
 #неизвестная точка
-x_1 = int(input("ведите свой рост: "))
-y_1 = int(input("Введите свой вес: "))
+x_1 = 178
+y_1 = 56
 
 #толстый человек
 x_r1 = [150, 152, 157, 151, 159, 162, 154, 155, 153, 164]
@@ -33,7 +33,7 @@ for i in y_r2:
 #создаём вложаный масив с координатами х и у
 l = len(x) - 1
 
-i = 0
+i = -1
 
 xy = []
 
@@ -44,6 +44,22 @@ while i < l:
     g.append(y[i])
     xy.append(g)
 
+#создаём классы к точкам
+classy = []
+
+nol = -1
+
+while nol < l:
+    nol += 1
+    h = 0
+    classy.append(h)
+
+one = -1
+
+while one < l:
+    one += 1
+    n = 1
+    classy.append(n)
 
 #ищем длину списков
 len_x = len(x) - 1
@@ -59,28 +75,28 @@ if len(kf) != len_x:
     for i in range(0, len(x)):
         kf.append(i)
 
-#переводим см в метры
-nx = []
-for i in x:
-    g = i / 100
-    nx.append(g)
-
-#создаём масив с кофициентом жирности, отношение веса и роста
-en = []
-for i in kf:
-    lot = y[i] / (nx[i]**2)
-    en.append(round(lot, 2))
-
-#ищим ваш коофициент жирности
-jol = y_1 / ((x_1 / 100)**2)
-kf_you = round(jol, 2)
+# #переводим см в метры
+# nx = []
+# for i in x:
+#     g = i / 100
+#     nx.append(g)
+#
+# #создаём масив с кофициентом жирности, отношение веса и роста
+# en = []
+# for i in kf:
+#     lot = y[i] / (nx[i]**2)
+#     en.append(round(lot, 2))
+#
+# #ищим ваш коофициент жирности
+# jol = y_1 / ((x_1 / 100)**2)
+# kf_you = round(jol, 2)
 
 #через цикл перебирается значения по х насколько эта точка удалена от остальных по х
 n = []
 
-for i in en:
-    l = i - kf_you
-    n.append(round(l, 2))
+for i in x:
+    l = i - x_1
+    n.append(l)
 
 #сортируем масив
 k = sorted(n)
@@ -122,17 +138,55 @@ for i in k:
 #находим минимальный элемент из положительных
 min_2 = min(d)
 
-#смотрим растояние
+bl_t_x = []
+
+#смотрим растояние по x
 if min_2 <= min_1:
     if min_2 < min_1_1:
-        print("Точка пренадлежит к толстым")
+        for i in k:
+            if min_2 == i:
+                tchk3 = x_1 + min_2
+
+        index3 = -1
+        for i in xy:
+            index3 += 1
+            rs3 = i[0]
+            if tchk3 == rs3:
+                pol_tchk3 = xy[index3]
+                bl_t_x.append(pol_tchk3)
     else:
-        print("Точка пренадлежит к худым")
+        tochka1_1 = min_1_1 * (-1)
+
+        for i in k:
+            if tochka1_1 == i:
+                tchk2 = x_1 + tochka1_1
+
+        index2 = -1
+        for i in xy:
+            index2 += 1
+            rs2 = i[0]
+            if tchk2 == rs2:
+                pol_tchk2 = xy[index2]
+                bl_t_x.append(pol_tchk2)
 else:
-    print("Точка пренадлежит к худым")
+    tochka1 = min_1 * (-1)
+
+    for i in k:
+        if tochka1 == i:
+            tchk1 = x_1 + tochka1
+
+    index1 = -1
+    for i in xy:
+        index1 += 1
+        rs1 = i[0]
+        if tchk1 == rs1:
+            pol_tchk1 = xy[index1]
+            bl_t_x.append(pol_tchk1)
+
+print(bl_t_x)
 
 #строим график для наглядности и проверки
-import matplotlib.pyplot as plt
-plt.scatter(x, y)
-plt.scatter(x_1, y_1)
-plt.show()
+# import matplotlib.pyplot as plt
+# plt.scatter(x, y)
+# plt.scatter(x_1, y_1)
+# plt.show()
