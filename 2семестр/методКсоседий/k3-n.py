@@ -75,22 +75,6 @@ if len(kf) != len_x:
     for i in range(0, len(x)):
         kf.append(i)
 
-# #переводим см в метры
-# nx = []
-# for i in x:
-#     g = i / 100
-#     nx.append(g)
-#
-# #создаём масив с кофициентом жирности, отношение веса и роста
-# en = []
-# for i in kf:
-#     lot = y[i] / (nx[i]**2)
-#     en.append(round(lot, 2))
-#
-# #ищим ваш коофициент жирности
-# jol = y_1 / ((x_1 / 100)**2)
-# kf_you = round(jol, 2)
-
 #через цикл перебирается значения по х насколько эта точка удалена от остальных по х
 n = []
 
@@ -184,7 +168,6 @@ else:
             bl_t_x.append(pol_tchk1)
 
 print(bl_t_x)
-
 
 #через цикл перебирается значения по y насколько эта точка удалена от остальных по y
 ny = []
@@ -281,13 +264,13 @@ else:
 print(bl_t_y)
 
 print(x_1, y_1)
-#раскрываем точку по x
+#раскрываем точку 1 по x
 x1_1 = []
 
 for i in bl_t_x:
     x1_1.append(i[0])
 
-#убераем найденую точку по x из масива
+#убераем найденую точку 1 по x из масива
 x1 = []
 
 for xi in x1_1:
@@ -295,19 +278,155 @@ for xi in x1_1:
         if i != xi:
             x1.append(i)
 
-#раскрываем точку по y
+#раскрываем точку 1 по y
 y1_1 = []
 
 for i in bl_t_x:
     y1_1.append(i[1])
 
-#убераем найденую точку по y из масива
+#убераем найденую точку 1 по y из масива
 y1 = []
 
 for yi in y1_1:
     for i in y:
         if i != yi:
             y1.append(i)
+
+#раскрываем точку 2 по x
+y_x1_1 = []
+
+for i in bl_t_y:
+    y_x1_1.append(i[0])
+
+#убераем найденую точку 2 по x из масива
+y_x1 = []
+
+for xi in y_x1_1:
+    for i in x1:
+        if i != xi:
+            y_x1.append(i)
+
+#раскрываем точку 1 по y
+y_y1_1 = []
+
+for i in bl_t_y:
+    y_y1_1.append(i[1])
+
+#убераем найденую точку 1 по y из масива
+y_y1 = []
+
+for yi in y_y1_1:
+    for i in y1:
+        if i != yi:
+            y_y1.append(i)
+
+#создаём вложаный масив с координатами х и у без найденых точек
+l1 = len(y_x1) - 1
+
+ixy = -1
+
+xy1 = []
+
+while ixy < l1:
+    ixy += 1
+    g1 = []
+    g1.append(y_x1[ixy])
+    g1.append(y_y1[ixy])
+    xy1.append(g1)
+
+#через цикл перебирается значения по х насколько эта точка удалена от остальных по х
+n1 = []
+
+for i in y_x1:
+    lo = i - x_1
+    n1.append(lo)
+
+#сортируем масив
+k1 = sorted(n1)
+
+#закидываем в масив только отрецательные элементы
+b1 = []
+
+for i in k1:
+    if i < 0:
+     b1.append(i)
+
+#все элементы делаем положительными
+s1 = []
+
+for i in b1:
+    g1 = i * -1
+    s1.append(g1)
+
+#находим минимальный элемент
+new_min_1 = min(s1)
+
+#убераем уже найденый минимальный элемет из масива
+s1_2 = []
+
+for i in s1:
+    if i > new_min_1:
+        s1_2.append(i)
+
+#находим ещё один минимальный элемент из масива толстых
+new_min_1_1 = min(s1_2)
+
+#закидываем в масив только положительные элементы
+d1 = []
+
+for i in k1:
+    if i > 0:
+        d1.append(i)
+
+#находим минимальный элемент из положительных
+new_min_2 = min(d1)
+
+bl_t_x1 = []
+
+#смотрим растояние точки 3 по x
+if new_min_2 <= new_min_1:
+    if new_min_2 < new_min_1_1:
+        for i in k1:
+            if new_min_2 == i:
+                new_tchk3 = x_1 + new_min_2
+
+        new_index3 = -1
+        for i in xy1:
+            new_index3 += 1
+            new_rs3 = i[0]
+            if new_tchk3 == new_rs3:
+                new_pol_tchk3 = xy1[new_index3]
+                bl_t_x1.append(new_pol_tchk3)
+    else:
+        new_tochka1_1 = new_min_1_1 * (-1)
+
+        for i in k1:
+            if new_tochka1_1 == i:
+                new_tchk2 = x_1 + new_tochka1_1
+
+        new_index2 = -1
+        for i in xy1:
+            new_index2 += 1
+            new_rs2 = i[0]
+            if new_tchk2 == new_rs2:
+                new_pol_tchk2 = xy1[new_index2]
+                bl_t_x1.append(new_pol_tchk2)
+else:
+    new_tochka1 = new_min_1 * (-1)
+
+    for i in k1:
+        if new_tochka1 == i:
+            new_tchk1 = x_1 + new_tochka1
+
+    new_index1 = -1
+    for i in xy1:
+        new_index1 += 1
+        new_rs1 = i[0]
+        if new_tchk1 == new_rs1:
+            new_pol_tchk1 = xy1[new_index1]
+            bl_t_x1.append(new_pol_tchk1)
+
+print(bl_t_x1)
 
 #строим график для наглядности и проверки
 # import matplotlib.pyplot as plt
