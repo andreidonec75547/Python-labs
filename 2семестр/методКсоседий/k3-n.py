@@ -281,19 +281,34 @@ else:
 print(bl_t_y)
 
 print(x_1, y_1)
-
+#раскрываем точку по x
 x1_1 = []
 
 for i in bl_t_x:
     x1_1.append(i[0])
-print(x1_1)
-#убераем уже найденые точки из масива
+
+#убераем найденую точку по x из масива
 x1 = []
 
-for i in xy:
-    if i != bl_t_x:
-        x1.append(i)
-print(x1)
+for xi in x1_1:
+    for i in x:
+        if i != xi:
+            x1.append(i)
+
+#раскрываем точку по y
+y1_1 = []
+
+for i in bl_t_x:
+    y1_1.append(i[1])
+
+#убераем найденую точку по y из масива
+y1 = []
+
+for yi in y1_1:
+    for i in y:
+        if i != yi:
+            y1.append(i)
+
 #строим график для наглядности и проверки
 # import matplotlib.pyplot as plt
 # plt.scatter(x, y)
