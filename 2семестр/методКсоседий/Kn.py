@@ -1,4 +1,4 @@
-# метод K ближайших соседей для K = бесконечности нечётных чисел
+# метод K ближайших соседей для K = 3
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.model_selection import train_test_split
