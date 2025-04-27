@@ -1,4 +1,4 @@
-# метод K ближайших соседей для K = 3
+# метод K ближайших соседей для K = бесконечности нечётных чисел
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -113,7 +113,10 @@ for test in xy_test:
             dlin2.append(i2)
 
     min_tchk3 = min(dlin2)
-    #тут что-то происходит
+
+    # с начала проверяем найденые минимальные растояния на самое близкое, если два растояния равны то берётся третье растояние и проверяется
+    # находимм индекс данной точки, после получаем её класс и на основе класа делаем ещё одну проверку
+    # если класс относится к 0 то выводим круглую зелённую точку, если нет то выводим зелённый крестик
     if min_tchk1 <= min_tchk2:
         if min_tchk1 < min_tchk3:
             ind_dl = dlin.index(min_tchk1)
@@ -142,7 +145,8 @@ for test in xy_test:
             plt.scatter(test[0], test[1], color='green')
         else:
             plt.scatter(test[0], test[1], color='green', marker='X')
-
+            
+# здесь выводим точки принадлежашие к обучаюшим точкам модели с проверкой на класс
 for train in xy_train:
     ind_tr = x.index(train[0])
     clas_tr = classy[ind_tr]
