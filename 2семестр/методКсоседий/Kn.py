@@ -4,12 +4,12 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 # толстый человек
-x_r1 = [150, 152, 157, 151, 159, 162, 154, 155, 153, 164]
-y_r1 = [100, 85, 92, 99, 81, 88, 82, 94, 91, 90]
+x_r1 = [150, 152, 157, 151, 159, 162, 154, 155, 153, 164, 165, 151, 160, 151, 154, 167, 160, 159, 157, 150]
+y_r1 = [100, 85, 92, 99, 81, 88, 82, 94, 91, 90, 81, 83, 80, 76, 75, 93, 100, 97, 86, 90]
 
 # худой человек
-x_r2 = [177, 189, 180, 176, 183, 188, 175, 181, 190, 186]
-y_r2 = [59, 53, 51, 58, 60, 52, 55, 50, 57, 54]
+x_r2 = [177, 189, 180, 176, 183, 188, 175, 181, 190, 186, 170, 171, 172, 180, 189, 193, 192, 190, 187, 180]
+y_r2 = [59, 53, 51, 58, 60, 52, 55, 50, 57, 54, 56, 61, 51, 64, 68, 53, 59, 61, 62, 54]
 
 # создаём общий масив х рост человека
 x = []
@@ -79,6 +79,12 @@ if len(kf) != len_x:
 # делим данные на обучение и тестовые
 xy_train, xy_test = train_test_split(np.array(xy), test_size=0.3)
 
+# длина масива с тестовами данами
+len_test = len(xy_test)
+
+# количество правельных точек
+len_prover = 0
+
 # ищем растояние между точками
 for test in xy_test:
     dlin = []
@@ -101,7 +107,7 @@ for test in xy_test:
 
     # ищем минимальную длину
     min_tchk1 = min(dlin)
-    dlin1 =[]
+    dlin1 = []
     for i in dlin:
         if i > min_tchk1:
             dlin1.append(i)
@@ -114,6 +120,9 @@ for test in xy_test:
 
     min_tchk3 = min(dlin2)
 
+    ind_test = x.index(test[0])
+    clas_test = classy[ind_test]
+
     # с начала проверяем найденые минимальные растояния на самое близкое, если два растояния равны то берётся третье растояние и проверяется
     # находимм индекс данной точки, после получаем её класс и на основе класа делаем ещё одну проверку
     # если класс относится к 0 то выводим круглую зелённую точку, если нет то выводим зелённый крестик
@@ -124,28 +133,62 @@ for test in xy_test:
             ind1 = x.index(tchk1[0])
             clas1 = classy[ind1]
             if clas1 == 0:
-                plt.scatter(test[0], test[1], color='green')
+                if clas_test == clas1:
+                    plt.scatter(test[0], test[1], color='green')
+                    len_prover += 1
+                else:
+                    plt.scatter(test[0], test[1], color='red')
+                    len_prover -= 1
             else:
-                plt.scatter(test[0], test[1], color='green', marker='X')
+                if clas_test == clas1:
+                    plt.scatter(test[0], test[1], color='green', marker='X')
+                    len_prover += 1
+                else:
+                    plt.scatter(test[0], test[1], color='red', marker='X')
+                    len_prover -= 1
         else:
             ind_dl3 = dlin.index(min_tchk3)
             tchk3 = xy_train[ind_dl3]
             ind3 = x.index(tchk3[0])
             clas3 = classy[ind3]
             if clas3 > 0:
-                plt.scatter(test[0], test[1], color='green')
+                if clas_test == clas3:
+                    plt.scatter(test[0], test[1], color='green')
+                    len_prover += 1
+                else:
+                    plt.scatter(test[0], test[1], color='red')
+                    len_prover -= 1
             else:
-                plt.scatter(test[0], test[1], color='green', marker='X')
+                if clas_test == clas3:
+                    plt.scatter(test[0], test[1], color='green', marker='X')
+                    len_prover += 1
+                else:
+                    plt.scatter(test[0], test[1], color='red', marker='X')
+                    len_prover -= 1
     else:
         ind_dl2 = dlin.index(min_tchk2)
         tchk2 = xy_train[ind_dl2]
         ind2 = x.index(tchk2[0])
         clas2 = classy[ind2]
         if clas2 > 0:
-            plt.scatter(test[0], test[1], color='green')
+            if clas_test == clas2:
+                plt.scatter(test[0], test[1], color='green')
+                len_prover += 1
+            else:
+                plt.scatter(test[0], test[1], color='red')
+                len_prover -= 1
         else:
-            plt.scatter(test[0], test[1], color='green', marker='X')
-            
+            if clas_test == clas2:
+                plt.scatter(test[0], test[1], color='green', marker='X')
+                len_prover += 1
+            else:
+                plt.scatter(test[0], test[1], color='red', marker='X')
+                len_prover -= 1
+
+# расчёт точности модели
+tcn_model = (len_prover / len_test) * 100
+print(tcn_model)
+
 # здесь выводим точки принадлежашие к обучаюшим точкам модели с проверкой на класс
 for train in xy_train:
     ind_tr = x.index(train[0])
